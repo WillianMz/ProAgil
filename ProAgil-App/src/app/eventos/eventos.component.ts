@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { EventoService } from '../_services/evento.service';
+import { Evento } from '../_models/Evento';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-eventos',
@@ -8,7 +10,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EventosComponent implements OnInit {
 
-  listaFiltro: string;
+  eventosFiltrados: Evento[];
+  eventos: Evento[];
+  imagemLargura = 50;
+  imagemMargem = 2;
+  mostrarImagem = false;
+  modalRef: BsModalRef;
+
+  listaFiltro = '';
+
+  constructor(
+    private eventoService: EventoService,
+    private modalService: BsModalService
+  ) { }
+
   get filtroLista(): string
   {
     return this.listaFiltro;
@@ -17,30 +32,23 @@ export class EventosComponent implements OnInit {
   set filtroLista(value: string)
   {
     this.listaFiltro = value;
-    this.eventosFiltrados = this.filtroLista ? this.filtrarEvento(this.filtroLista) : this.Eventos;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEvento(this.filtroLista) : this.eventos;
   }
 
-  eventosFiltrados: any = [];
-
-  Eventos: any = [];
-  imagemLargura = 50;
-  imagemMargem = 2;
-  mostrarImagem = false;
-
-  constructor(private http: HttpClient) { }
+  openModal(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+  }
 
   ngOnInit()
   {
     this.getEventos();
   }
 
-  filtrarEvento(filtrarPor: string)
-  {
+  filtrarEvento(filtrarPor: string): Evento[]{
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.Eventos.filter(evento =>
-      {
-        return evento.tema.toLocaleLowerCase().includes(filtrarPor);
-      });
+    return this.eventos.filter(
+      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) === -1
+    );
   }
 
   alternarImagem()
@@ -50,9 +58,14 @@ export class EventosComponent implements OnInit {
 
   getEventos()
   {
-    this.http.get('http://localhost:5000/api/values').subscribe(
-      response => { this.Eventos = response; console.log(response); }, error => { console.log(error); }
-    );
+    this.eventoService.getAllEventos().subscribe(
+      (objEvento: Evento[]) => {
+      this.eventos = objEvento;
+      this.eventosFiltrados = this.eventos;
+      console.log(objEvento);
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
