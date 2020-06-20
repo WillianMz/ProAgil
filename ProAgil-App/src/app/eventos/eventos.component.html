@@ -1,6 +1,7 @@
 
-<div class="d-flex">
+<app-titulo></app-titulo>
 
+<div class="d-flex">
   <div class="form-inline mr-auto">
     <div class="form-group mb-2">
       <label class="mr-2">Filtro: </label>
@@ -23,27 +24,24 @@
   <thead class="thead-light">
     <tr>
       <th>
-        <button class="btn btn-outline-primary"
-          (click)="alternarImagem()">
-          <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}} "></i>
+        <button class="btn btn-outline-primary" (click)="alternarImagem()">
+          <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
         </button>
       </th>
       <th>#</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
-      <th>Qtd.Pessoas</th>
+      <th>Qtd Pessoas</th>
       <th>Lote</th>
-      <th>Opções</th>
+      <th colspan="2">Opções</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor='let evento of eventosFiltrados'>
+  
+  <tbody >
+    <tr *ngFor="let evento of eventosFiltrados">
       <td>
-        <img *ngIf='mostrarImagem' 
-          src="http://localhost:5000/img/{{evento.imagemURL}}"
-          [style.width.px]="imagemLargura"
-          [style.margin.px]="imagemMargem">        
+        <img *ngIf='mostrarImagem' src="http://localhost:5000/img/{{evento.imagemURL}}" [style.width.px]="imagemLargura" [style.margin.px]="imagemMargem">        
       </td>
       <td>{{evento.eventoID}}</td>
       <td>{{evento.tema}}</td>
@@ -51,17 +49,16 @@
       <td>{{evento.dataEvento | DateTimeFormatPipe}}</td>
       <td>{{evento.qtdPessoas}}</td>
       <td>
-        <div *ngIf='!evento.lotes.length'>
-          Não informado
-        </div>
-        <div *ngIf='evento.lotes.length'>
+        <div *ngIf="evento.lotes.length">
           {{evento.lotes[0].nome | uppercase}}
         </div>
+        <div *ngIf="!evento.lotes.length">
+          Não Informado
+        </div>        
       </td>
       <td>
         <div class="btn-group">
-          <button class="btn btn-sm btn btn-success" 
-            tooltip='Editar'(click)='editarEvento(evento, template)'>
+          <button class="btn btn-sm btn btn-success" tooltip='Editar'(click)='editarEvento(evento, template)'>
             <i class="fa fa-edit"></i>
           </button>
           <button class="btn btn-sm btn-danger" tooltip='Excluir' (click)='excluirEvento(evento, confirm)'>
@@ -134,8 +131,10 @@
             <div class="form-group col-md-4">
               <label>Data e Hora</label>
               <input type="text" class="form-control"
-              bsDatepicker
-              [bsConfig]="{ dateInputFormat : 'DD/MM/YYYY hh:mm a'}"
+              bsDatepicker 
+              value="{{evento.dataEvento | DateTimeFormatPipe}}"
+              [(ngModel)]="evento.dataEvento"
+              [bsConfig]="{ dateInputFormat : 'DD/MM/YYYY hh:mm'}"
               [ngClass]="{'is-invalid': registerForm.get('dataEvento').errors && registerForm.get('dataEvento').touched}" formControlName="dataEvento"
               placeholder="Informe a data e a hora">
               
@@ -229,7 +228,7 @@
         </div>
         
     		<div class="modal-body">
-      			<p>{{bodyDeletarEvento}}</p>
+          <p>{{bodyDeletarEvento}}</p>
         </div>  
           
     		<div class="modal-footer btn-group d-flex">      
@@ -238,5 +237,5 @@
         </div>
         
   		</div>
-	</div>
+  </div>
 </div>

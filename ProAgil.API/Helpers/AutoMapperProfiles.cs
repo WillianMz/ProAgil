@@ -28,8 +28,8 @@ namespace ProAgil.API.Helpers
                 .ReverseMap();
 
             CreateMap<Lote, LoteDTO>().ReverseMap();
-            //CreateMap<LoteDTO, Lote>();
             CreateMap<RedeSocial, RedeSocialDTO>().ReverseMap();
+            //CreateMap<LoteDTO, Lote>();            
             //CreateMap<RedeSocialDTO, RedeSocial>();
         }        
     }

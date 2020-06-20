@@ -6,8 +6,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
-import { JsonPipe } from '@angular/common';
-import { templateJitUrl } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -27,28 +26,50 @@ export class EventosComponent implements OnInit {
   registerForm: FormGroup;
   bodyDeletarEvento = '';
 
-  listaFiltro = '';
+  _filtroLista  = '';
   modoSalvar = 'post';
 
   constructor(
     private eventoService: EventoService,
     private modalService: BsModalService,
     private fb: FormBuilder,
-    private localService: BsLocaleService
-  )
-  {
+    private localService: BsLocaleService,
+    private toastr: ToastrService
+  ){
     this.localService.use('pt-br');
   }
 
-  get filtroLista(): string
-  {
-    return this.listaFiltro;
+  get filtroLista(): string{
+    return this._filtroLista ;
   }
 
-  set filtroLista(value: string)
-  {
-    this.listaFiltro = value;
+  set filtroLista(value: string){
+    this._filtroLista  = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEvento(this.filtroLista) : this.eventos;
+  }
+  
+  ngOnInit(){
+    this.validation();
+    this.getEventos();        
+  }
+
+  getEventos()
+  {
+    this.eventoService.getAllEventos().subscribe(
+      (_eventos: Evento[]) => {
+        this.eventos = _eventos;
+        this.eventosFiltrados = this.eventos;
+        console.log(this.eventos);
+      }, error => {
+        this.toastr.error(`Erro ao tentar carregar eventos: ${error}`);
+      });
+  }
+
+  filtrarEvento(filtrarPor: string): Evento[]{
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.eventos.filter(
+      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) === -1
+    );
   }
 
   editarEvento(evento: Evento, template: any){
@@ -74,21 +95,7 @@ export class EventosComponent implements OnInit {
     template.show();
   }
 
-  ngOnInit()
-  {
-    this.validation();
-    this.getEventos();
-  }
-
-  filtrarEvento(filtrarPor: string): Evento[]{
-    filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.eventos.filter(
-      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) === -1
-    );
-  }
-
-  alternarImagem()
-  {
+  alternarImagem(){
     this.mostrarImagem = !this.mostrarImagem;
   }
 
@@ -116,8 +123,12 @@ export class EventosComponent implements OnInit {
             console.log(novoEvento);
             template.hide();
             this.getEventos();
+            this.toastr.success('Inserido com sucesso!');
           },
-          error => { console.log(error); }
+          error => { 
+            this.toastr.error(`Erro ao inserir novo evento: ${error}`);
+            //console.log(error); 
+          }
         );
       }
       else
@@ -127,8 +138,12 @@ export class EventosComponent implements OnInit {
           () => {
             template.hide();//fecha form modal
             this.getEventos();//atualiza grid de eventos
+            this.toastr.success('Evento editado com sucesso!');
           },
-          error => { console.log(error); }
+          error => {
+            this.toastr.error(`Erro ao editar evento: ${error}`); 
+            //console.log(error); 
+          }
         );
       }
     }
@@ -139,23 +154,12 @@ export class EventosComponent implements OnInit {
       () => {
         template.hide();
         this.getEventos();
+        this.toastr.success('Deletado com sucesso!','teste');
       },
       error => {
-        console.log(error);
+        this.toastr.error(`Erro ao deletar evento: ${error}`);
+        //console.log(error);
       }
     )
   }
-
-  getEventos()
-  {
-    this.eventoService.getAllEventos().subscribe(
-      (objEvento: Evento[]) => {
-      this.eventos = objEvento;
-      this.eventosFiltrados = this.eventos;
-      console.log(objEvento);
-    }, error => {
-      console.log(error);
-    });
-  }
-
 }

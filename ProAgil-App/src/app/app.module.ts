@@ -14,13 +14,22 @@ import { NavComponent } from './nav/nav.component';
 import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
 import { EventoService } from './_services/evento.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrModule} from 'ngx-toastr';
+import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContatosComponent } from './contatos/contatos.component';
+import { TituloComponent } from './_shared/titulo/titulo.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       EventosComponent,
       NavComponent,
-      DateTimeFormatPipePipe
+      DateTimeFormatPipePipe,
+      PalestrantesComponent,
+      DashboardComponent,
+      ContatosComponent,
+      TituloComponent
    ],
    imports: [
       BrowserModule,
@@ -32,7 +41,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       TooltipModule.forRoot(),
       ModalModule.forRoot(),
       ReactiveFormsModule,
-      BsDatepickerModule.forRoot()
+      BsDatepickerModule.forRoot(),
+      BrowserAnimationsModule,
+      ToastrModule.forRoot(
+         {
+            timeOut: 3000,
+            preventDuplicates: true,
+            progressBar: true
+         }
+      )
    ],
    providers: [
       EventoService
