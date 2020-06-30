@@ -26,8 +26,8 @@ export class EventosComponent implements OnInit {
   mostrarImagem = false;
   registerForm: FormGroup;
   bodyDeletarEvento = '';
+  listaFiltrada = '';
 
-  _filtroLista  = '';
   modoSalvar = 'post';
 
   constructor(
@@ -41,42 +41,43 @@ export class EventosComponent implements OnInit {
   }
 
   get filtroLista(): string{
-    return this._filtroLista ;
+    return this.listaFiltrada ;
   }
 
   set filtroLista(value: string){
-    this._filtroLista  = value;
-    this.eventosFiltrados = this.filtroLista ? this.filtrarEvento(this.filtroLista) : this.eventos;
+    this.listaFiltrada  = value;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
-  
+
   ngOnInit(){
     this.validation();
-    this.getEventos();        
+    this.getEventos();
   }
 
   getEventos()
   {
     this.eventoService.getAllEventos().subscribe(
-      (_eventos: Evento[]) => {
-        this.eventos = _eventos;
+      (evtEventos: Evento[]) => {
+        this.eventos = evtEventos;
         this.eventosFiltrados = this.eventos;
         console.log(this.eventos);
+        this.toastr.info(`${this.eventos}`);
       }, error => {
         this.toastr.error(`Erro ao tentar carregar eventos: ${error}`);
       });
   }
 
-  filtrarEvento(filtrarPor: string): Evento[]{
+  filtrarEventos(filtrarPor: string): Evento[]{
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
-      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) === -1
+      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 
   editarEvento(evento: Evento, template: any){
     this.modoSalvar = 'put';
     this.openModal(template);
-    this.evento = evento;//evento atual
+    this.evento = evento;
     this.registerForm.patchValue(evento);
   }
 
@@ -116,7 +117,7 @@ export class EventosComponent implements OnInit {
   {
     if (this.registerForm.valid)
     {
-      if(this.modoSalvar == 'post')
+      if (this.modoSalvar === 'post')
       {
         this.evento = Object.assign({}, this.registerForm.value);
         this.eventoService.postEvento(this.evento).subscribe(
@@ -126,9 +127,8 @@ export class EventosComponent implements OnInit {
             this.getEventos();
             this.toastr.success('Inserido com sucesso!');
           },
-          error => { 
+          error => {
             this.toastr.error(`Erro ao inserir novo evento: ${error}`);
-            //console.log(error); 
           }
         );
       }
@@ -137,13 +137,12 @@ export class EventosComponent implements OnInit {
         this.evento = Object.assign({eventoID: this.evento.eventoID}, this.registerForm.value);
         this.eventoService.putEvento(this.evento).subscribe(
           () => {
-            template.hide();//fecha form modal
-            this.getEventos();//atualiza grid de eventos
+            template.hide();
+            this.getEventos();
             this.toastr.success('Evento editado com sucesso!');
           },
           error => {
-            this.toastr.error(`Erro ao editar evento: ${error}`); 
-            //console.log(error); 
+            this.toastr.error(`Erro ao editar evento: ${error}`);
           }
         );
       }
@@ -155,12 +154,11 @@ export class EventosComponent implements OnInit {
       () => {
         template.hide();
         this.getEventos();
-        this.toastr.success('Deletado com sucesso!','teste');
+        this.toastr.success('Deletado com sucesso!', 'teste');
       },
       error => {
         this.toastr.error(`Erro ao deletar evento: ${error}`);
-        //console.log(error);
       }
-    )
+    );
   }
 }
