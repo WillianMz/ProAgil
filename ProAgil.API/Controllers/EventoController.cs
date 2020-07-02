@@ -64,7 +64,8 @@ namespace ProAgil.API.Controllers
                     using(var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         //pega o arquivo recebido e salva
-                        file.CopyTo(stream);
+                        //file.CopyTo(stream);
+                        await file.CopyToAsync(stream);
                     }
                 }
 
@@ -75,7 +76,7 @@ namespace ProAgil.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco de dados falhou {ex.Message}");
             }
 
-            return BadRequest("Erro ao tentar realizar upload!");
+            //return BadRequest("Erro ao tentar realizar upload!");
         }
 
         [HttpGet("{EventoId}")]
