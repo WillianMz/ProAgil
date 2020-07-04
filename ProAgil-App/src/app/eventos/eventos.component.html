@@ -158,10 +158,17 @@
 
             <div class="form-group col-md-9">
               <label>Imagem</label>
-              <input type="text" class="form-control"
-              [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors && registerForm.get('imagemURL').touched}" formControlName="imagemURL"
-              placeholder="Insira a imagem">
-
+              <table>
+                <tr>
+                  <td>
+                    <button class="btn btn-success" (click)="file.click()">Selecionar Imagem</button>
+                    <input type="file" #file class="form-control" [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors 
+                    && registerForm.get('imagemURL').touched}" (change)="onFileChange($event)"
+                    formControlName="imagemURL" placeholder="Imagem"
+                    style="display: none;">
+                  </td>
+                </tr>
+              </table>    
               <div *ngIf="registerForm.get('imagemURL').hasError('required') && registerForm.get('imagemURL').touched" class="invalid-feedback">
                 Imagem é obrigatório!
               </div>

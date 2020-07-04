@@ -161,4 +161,10 @@ export class EventosComponent implements OnInit {
       }
     );
   }
+
+  onFileChange(event)
+  {
+    console.log(event);
+  }
+
 }
