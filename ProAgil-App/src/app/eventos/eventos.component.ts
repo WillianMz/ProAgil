@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { EventoService } from '../_services/evento.service';
 import { Evento } from '../_models/Evento';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -27,8 +27,10 @@ export class EventosComponent implements OnInit {
   registerForm: FormGroup;
   bodyDeletarEvento = '';
   listaFiltrada = '';
+  dataEvento: string;
 
   modoSalvar = 'post';
+  file: File;
 
   constructor(
     private eventoService: EventoService,
@@ -60,8 +62,8 @@ export class EventosComponent implements OnInit {
       (evtEventos: Evento[]) => {
         this.eventos = evtEventos;
         this.eventosFiltrados = this.eventos;
-        console.log(this.eventos);
-        this.toastr.info(`${this.eventos}`);
+        //console.log(this.eventos);
+        //this.toastr.info(`${this.eventos}`);
       }, error => {
         this.toastr.error(`Erro ao tentar carregar eventos: ${error}`);
       });
@@ -162,9 +164,16 @@ export class EventosComponent implements OnInit {
     );
   }
 
-  onFileChange(event)
-  {
-    console.log(event);
+  onFileChange(event){
+    //console.log(event);
+    const reader = new FileReader();
+
+    //se tem imagem e tamanho nao minusculo
+    if(event.target.files && event.target.files.lenght){
+      //atribui  
+      this.file = event.target.files;
+      console.log(this.file);
+    }
   }
 
 }
