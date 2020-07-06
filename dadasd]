@@ -1,0 +1,139 @@
+[33mcommit 382843857239ab19b6dd8b1d864927d4df61fcf9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Sat Jul 4 22:43:55 2020 -0300
+
+    Correcao de bugs
+
+[33mcommit 1a4ac3567a81f21d75c7b0c18260d740aa5eb10c[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Fri Jul 3 21:37:48 2020 -0300
+
+    Alteracao no Componenete Evento
+
+[33mcommit 1b53a09b9a51bc424f1baa9d613f3715200e950e[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Thu Jul 2 07:30:04 2020 -0300
+
+    Upload de imagens
+
+[33mcommit 81d55706f1c5963f36362c5c671ab3aa442aea75[m
+Author: Willian Mazzorana <willianmazzorana@hotmail.com>
+Date:   Mon Jun 29 21:21:18 2020 -0300
+
+    Alteracoes no componente Evento e na API para upload de Imagem
+
+[33mcommit 5fb06776e3f092ea70bf3e286ee74c0d15700061[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Mon Jun 22 21:56:43 2020 -0300
+
+    Rotas, Alertas e Input
+
+[33mcommit b49883e865f5c72585b6f13eca8dc21d86439f2f[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Sat Jun 20 18:51:17 2020 -0300
+
+    Alteracoes pendentes de confirmacao
+
+[33mcommit ab2a3684f723f00c4fe8899bdb7fd4f13bfdd2f5[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Thu Jun 11 11:39:07 2020 -0300
+
+    AutoMapper e Data Annotations
+
+[33mcommit 44c266dc4d8c1429a6fa29807fdc86298b3cbe98[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Thu Jun 11 09:23:49 2020 -0300
+
+    Finalizando a parte de Reactive forms e Crud
+
+[33mcommit 95cbc44ff3da5df2f7c1815cf47ac4eb0941b885[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 26 06:25:27 2020 -0300
+
+    Mudancas no componente Evento
+
+[33mcommit bdcc65a2fd9976fcc66a24578d21565f23a60bb1[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 19 22:37:35 2020 -0300
+
+    Nova imagem
+
+[33mcommit 6dc0cde1bb51e5091c8bd3aa384961ec605a83c1[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 19 22:32:59 2020 -0300
+
+    Angular- Organizando o projeto
+
+[33mcommit 0b00c88e73c7045ed67ba9487fc61b53ab2e31cf[m
+Merge: 010eb2c b926b57
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 19 06:21:36 2020 -0300
+
+    Merge branch 'master' of https://github.com/WillianMz/ProAgil
+
+[33mcommit 010eb2cbf504283b9e9026737627936a91323f7f[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 19 06:20:52 2020 -0300
+
+    Separação do projeto em camadas e criacao da solucao
+
+[33mcommit b926b57c034f6df14dd8aa7d57887a7f10aa2aea[m
+Author: Willian <willianmazzorana@hotmail.com>
+Date:   Wed May 13 13:02:36 2020 -0300
+
+    Update README.md
+
+[33mcommit d1345f12afa5e6339fc29c4a8ffc0ca66443b593[m
+Author: Willian <willianmazzorana@hotmail.com>
+Date:   Wed May 13 13:02:27 2020 -0300
+
+    Update README.md
+
+[33mcommit 5e0c93b20dab97c551c3a4aa294fb1bed7902e2d[m
+Author: Willian <willianmazzorana@hotmail.com>
+Date:   Wed May 13 13:02:09 2020 -0300
+
+    Update README.md
+
+[33mcommit 256dcb6950f7cf4a6ea21dd2f3aa72b9ba38b98f[m
+Merge: a871f49 9c2f697
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Wed May 13 13:00:41 2020 -0300
+
+    Merge branch 'master' of https://github.com/WillianMz/ProAgil
+
+[33mcommit a871f492eaae580ccaf003d742b35b7128161227[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Wed May 13 12:57:42 2020 -0300
+
+    Adicionado imagem
+
+[33mcommit 9c2f697591efa824c448215ace1c734d7c2c8977[m
+Author: Willian <willianmazzorana@hotmail.com>
+Date:   Wed May 13 12:55:17 2020 -0300
+
+    Update README.md
+
+[33mcommit 4a1c274de7ef2862c22b1ce9c605847e87121701[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Wed May 13 12:52:55 2020 -0300
+
+    ]Adicionado imagem
+
+[33mcommit a5c151e2537591c8d9c3196536d90d05838a3a8a[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 12 23:57:25 2020 -0300
+
+    Inclusão dos conceitos de Interpolação, Diretivas e Binding
+
+[33mcommit 9f3816adfde95408fbd8a793103e2667480484b5[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Tue May 12 00:15:55 2020 -0300
+
+    Adicionado projeto Angular
+
+[33mcommit 7a33363ec49ad86a7a9782bbc6fe9c0810572f49[m
+Author: Willian Mz <willianmazzorana@hotmail.com>
+Date:   Mon May 11 22:15:37 2020 -0300
+
+    Inicio do projeto de Eventos

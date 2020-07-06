@@ -31,6 +31,8 @@ export class EventosComponent implements OnInit {
 
   modoSalvar = 'post';
   file: File;
+  fileNameToUpdate: string;
+  dataAtual: string;
 
   constructor(
     private eventoService: EventoService,
@@ -62,8 +64,8 @@ export class EventosComponent implements OnInit {
       (evtEventos: Evento[]) => {
         this.eventos = evtEventos;
         this.eventosFiltrados = this.eventos;
-        //console.log(this.eventos);
-        //this.toastr.info(`${this.eventos}`);
+        // console.log(this.eventos);
+        // this.toastr.info(`${this.eventos}`);
       }, error => {
         this.toastr.error(`Erro ao tentar carregar eventos: ${error}`);
       });
@@ -79,8 +81,11 @@ export class EventosComponent implements OnInit {
   editarEvento(evento: Evento, template: any){
     this.modoSalvar = 'put';
     this.openModal(template);
-    this.evento = evento;
-    this.registerForm.patchValue(evento);
+    this.evento = Object.assign({}, evento);
+    // guarda o nome do arquivo de img
+    this.fileNameToUpdate = evento.imagemURL.toString();
+    this.evento.imagemURL = '';
+    this.registerForm.patchValue(this.evento);
   }
 
   novoEvento(template: any){
@@ -119,9 +124,11 @@ export class EventosComponent implements OnInit {
   {
     if (this.registerForm.valid)
     {
-      if (this.modoSalvar === 'post')
-      {
+      if (this.modoSalvar === 'post'){
         this.evento = Object.assign({}, this.registerForm.value);
+
+        this.uploadImagem();
+
         this.eventoService.postEvento(this.evento).subscribe(
           (novoEvento: Evento) => {
             console.log(novoEvento);
@@ -134,8 +141,7 @@ export class EventosComponent implements OnInit {
           }
         );
       }
-      else
-      {
+      else{
         this.evento = Object.assign({eventoID: this.evento.eventoID}, this.registerForm.value);
         this.eventoService.putEvento(this.evento).subscribe(
           () => {
@@ -165,14 +171,41 @@ export class EventosComponent implements OnInit {
   }
 
   onFileChange(event){
-    //console.log(event);
+    // console.log(event);
     const reader = new FileReader();
 
-    //se tem imagem e tamanho nao minusculo
-    if(event.target.files && event.target.files.lenght){
-      //atribui  
+    // se tem imagem e tamanho nao minusculo
+    if (event.target.files && event.target.files.lenght){
+      // atribui
       this.file = event.target.files;
       console.log(this.file);
+    }
+  }
+
+  uploadImagem(){
+    // trata o nome do arquivo, pois o mesmo vem com diretorio incorreto
+    // exemplo:
+    // imagemURL = c:\\fakeFolder\img1.jpg; diretorio incorreto
+    // nomeArquivo = [c:, fakeFolder, img1.jpg];
+    if (this.modoSalvar === 'post'){
+      const nomeArquivo = this.evento.imagemURL.split('\\', 3);
+      this.evento.imagemURL = nomeArquivo[2];
+      this.eventoService.postUpload(this.file, nomeArquivo[2])
+        .subscribe(
+          () => {
+            this.dataAtual = new Date().getMilliseconds().toString();
+            this.getEventos();
+          }
+        );
+    }else{
+      this.evento.imagemURL = this.fileNameToUpdate;
+      this.eventoService.postUpload(this.file, this.fileNameToUpdate)
+        .subscribe(
+          () => {
+            this.dataAtual = new Date().getMilliseconds().toString();
+            this.getEventos();
+          }
+        );
     }
   }
 
