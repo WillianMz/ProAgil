@@ -33,7 +33,7 @@
       <th>Data</th>
       <th>Qtd Pessoas</th>
       <th>Lote</th>
-      <th colspan="2">Opções</th>
+      <th colspan="2" class="text-center">Opções</th>
     </tr>
   </thead>
   
@@ -66,6 +66,13 @@
           </button>
         </div>
       </td>
+    
+      <td>
+        <a [routerLink]="['/evento', evento.eventoID,'edit']" tooltip="Edição Detalhada" class="btn btn-sm btn-warning">
+          <i class="fa fa-edit"></i>
+        </a>
+      </td>
+
     </tr>
   </tbody>
 

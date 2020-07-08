@@ -8,6 +8,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthGuard } from './auth/auth.guard';
+import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
 
 
 const routes: Routes = [
@@ -17,10 +18,11 @@ const routes: Routes = [
       { path: 'registration', component: RegistrationComponent }
     ]
   },
-  { path: 'eventos', component: EventosComponent, canActivate: [AuthGuard] },
-  { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard] },
+  { path: 'eventos',         component: EventosComponent,      canActivate: [AuthGuard] },
+  { path: 'evento/:id/edit', component: EventoEditComponent,   canActivate: [AuthGuard] },
+  { path: 'palestrantes',    component: PalestrantesComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard',       component: DashboardComponent,    canActivate: [AuthGuard] },
+  { path: 'contatos',        component: ContatosComponent,     canActivate: [AuthGuard] },
   // quando nao exixtir a rota
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   // quando for uma rota que nao exista
