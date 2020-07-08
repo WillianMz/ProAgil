@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Evento } from '../_models/Evento';
 
@@ -10,7 +10,9 @@ export class EventoService {
 
   baseURL = 'http://localhost:5000/api/evento';
 
-  constructor(private Http: HttpClient) { }
+  constructor(private Http: HttpClient) { 
+
+  }
 
   getAllEventos(): Observable<Evento[]>{
     return this.Http.get<Evento[]>(this.baseURL);
