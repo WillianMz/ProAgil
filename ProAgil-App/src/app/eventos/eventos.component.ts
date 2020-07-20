@@ -190,6 +190,7 @@ export class EventosComponent implements OnInit {
     if (this.modoSalvar === 'post'){
       const nomeArquivo = this.evento.imagemURL.split('\\', 3);
       this.evento.imagemURL = nomeArquivo[2];
+      
       this.eventoService.postUpload(this.file, nomeArquivo[2])
         .subscribe(
           () => {

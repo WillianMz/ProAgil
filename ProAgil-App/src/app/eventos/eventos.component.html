@@ -171,10 +171,17 @@
                 <tr>
                   <td>
                     <button class="btn btn-success" (click)="file.click()">Selecionar Imagem</button>
+                    <!--
                     <input type="file" #file class="form-control" [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors 
                     && registerForm.get('imagemURL').touched}" (change)="onFileChange($event)"
                     formControlName="imagemURL" placeholder="Imagem"
                     style="display: none;">
+                    -->
+                    <input type="file" #file [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors 
+                      && registerForm.get('imagemURL').touched}" (change)="onFileChange($event)" class="form-control is-invalid"
+                      formControlName="imagemURL" placeholder="" style="display: nome;"
+                    >
+
                   </td>
                 </tr>
               </table>    

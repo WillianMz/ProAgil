@@ -12,21 +12,21 @@
                     <div class="form-row">
                     
                         <div class="form-group col-md-12">
-                        <label>Tema</label>
-                        <input type="text" class="form-control" [(ngModel)]="evento.tema"
-                        [ngClass]="{'is-invalid': registerForm.get('tema').errors && registerForm.get('tema').touched}" formControlName="tema" placeholder="Insira o Tema">
-                        
-                        <div *ngIf="registerForm.get('tema').hasError('required') && registerForm.get('tema').touched" class="invalid-feedback">
-                            Tema é obrigatório.
-                        </div>
+                            <label>Tema</label>
+                            <input type="text" class="form-control" [(ngModel)]="evento.tema"
+                            [ngClass]="{'is-invalid': registerForm.get('tema').errors && registerForm.get('tema').touched}" formControlName="tema" placeholder="Insira o Tema">
+                            
+                            <div *ngIf="registerForm.get('tema').hasError('required') && registerForm.get('tema').touched" class="invalid-feedback">
+                                Tema é obrigatório.
+                            </div>
 
-                        <div *ngIf="registerForm.get('tema').hasError('minlength') && registerForm.get('tema').touched" class="invalid-feedback">
-                            Tema deve ter no mínimo 4 Caracters.
-                        </div>
+                            <div *ngIf="registerForm.get('tema').hasError('minlength') && registerForm.get('tema').touched" class="invalid-feedback">
+                                Tema deve ter no mínimo 4 Caracters.
+                            </div>
 
-                        <div *ngIf="registerForm.get('tema').hasError('maxlength') && registerForm.get('tema').touched" class="invalid-feedback">
-                            Tema deve ter no máximo 50 Caracters.
-                        </div>
+                            <div *ngIf="registerForm.get('tema').hasError('maxlength') && registerForm.get('tema').touched" class="invalid-feedback">
+                                Tema deve ter no máximo 50 Caracters.
+                            </div>
 
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             </div>
 
                         </div>
-                </div>
+                    </div>
 
                 </tab>
 
