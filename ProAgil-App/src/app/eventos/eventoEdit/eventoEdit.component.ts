@@ -14,7 +14,7 @@ import { Evento } from 'src/app/_models/Evento';
 export class EventoEditComponent implements OnInit {
 
   titulo = 'Editar Evento';
-  evento: Evento = new Evento();
+  //evento: Evento = new Evento();
   registerForm: FormGroup;
 
   constructor(
