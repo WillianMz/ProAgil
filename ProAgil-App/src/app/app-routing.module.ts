@@ -8,7 +8,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthGuard } from './auth/auth.guard';
-import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
+import { EventoEditComponent } from './eventos/evento-edit/evento-edit.component';
 
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'palestrantes',    component: PalestrantesComponent, canActivate: [AuthGuard] },
   { path: 'dashboard',       component: DashboardComponent,    canActivate: [AuthGuard] },
   { path: 'contatos',        component: ContatosComponent,     canActivate: [AuthGuard] },
-  // quando nao exixtir a rota
+  // quando nao existir a rota
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   // quando for uma rota que nao exista
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }

@@ -25,12 +25,13 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
+import { EventoEditComponent } from './eventos/evento-edit/evento-edit.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       EventosComponent,
+      EventoEditComponent,
       NavComponent,
       DateTimeFormatPipePipe,
       PalestrantesComponent,
@@ -39,8 +40,7 @@ import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
       TituloComponent,
       UserComponent,
       LoginComponent,
-      RegistrationComponent,
-      EventoEditComponent
+      RegistrationComponent
    ],
    imports: [
       BrowserModule,

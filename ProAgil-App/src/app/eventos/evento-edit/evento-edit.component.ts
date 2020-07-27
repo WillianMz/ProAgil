@@ -7,14 +7,14 @@ import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/_models/Evento';
 
 @Component({
-  selector: 'app-eventoEdit',
-  templateUrl: './eventoEdit.component.html',
-  styleUrls: ['./eventoEdit.component.css']
+  selector: 'app-evento-edit',
+  templateUrl: './evento-edit.component.html',
+  styleUrls: ['./evento-edit.component.css']
 })
 export class EventoEditComponent implements OnInit {
 
   titulo = 'Editar Evento';
-  //evento: Evento = new Evento();
+  evento = {};
   registerForm: FormGroup;
 
   constructor(
@@ -26,20 +26,22 @@ export class EventoEditComponent implements OnInit {
   ){
     this.localService.use('pt-br');
   }
+  
   ngOnInit() {
     this.validation();
   }
 
   validation(){
     this.registerForm = this.fb.group({
-      tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      local: ['', Validators.required],
+      tema:       ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      local:      ['', Validators.required],
       dataEvento: ['', Validators.required],
       qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
-      telefone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      imagemURL: ['', Validators.required]
+      telefone:   ['', Validators.required],
+      email:      ['', [Validators.required, Validators.email]],
+      imagemURL:  ['', Validators.required]
     });
   }
+  
 
 }
